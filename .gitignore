@@ -1,0 +1,8 @@
+data/
+log/
+
+.vscode
+boto.cfg
+docker-compose.yml
+gcloud-service-account-key.json
+stellar-core.cfg

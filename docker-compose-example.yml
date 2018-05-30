@@ -1,0 +1,31 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:9.6-alpine
+    ports:
+      - "5432"
+    networks:
+      - stellar
+    environment:
+      - POSTGRES_PASSWORD=password
+  stellar-core:
+    image: stellar-core:latest
+    command:
+      - "--conf /etc/stellar/stellar-core.cfg"
+    environment:
+      - STELLAR_CORE_DATABASE_URL=postgresql://dbname=stellarcore host=postgres user=postgres password=password
+      - STELLAR_CORE_HISTORY_CACHE_TYPE=gcloud
+      - STELLAR_CORE_HISTORY_CACHE_PATH=gs://YOURBUCKETNAME/
+    networks:
+      - stellar
+    volumes:
+      - ./stellar-core-testnet-example.cfg:/etc/stellar/stellar-core.cfg
+      - ./boto-example.cfg:/etc/boto.cfg
+      - ./gcloud-service-account-key.json:/etc/mobius-service-account.json
+      - ./data:/var/lib/stellar/
+      - ./logs:/var/log/stellar
+    depends_on:
+      - postgres
+
+networks:
+  stellar:
