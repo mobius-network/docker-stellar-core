@@ -25,9 +25,10 @@ RUN curl -q https://apt.stellar.org/SDF.asc | apt-key add - \
 
 # Additional packages
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install postgresql-client s3cmd python-pip \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install postgresql-client python-pip \
     && pip install "pyasn1>=0.4.3" \
     && pip install gsutil \
+    && pip install awscli \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

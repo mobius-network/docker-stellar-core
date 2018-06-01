@@ -2,7 +2,7 @@
 
 This repository is used to build a [Docker image](https://quay.io/repository/evilmartians/docker-stellar-core?tab=info) containing Stellar Core package with some tools to bootstrap Stellar Core installation and manage remote history uploading.
 
-Currently, only `gsutil` and Google Cloud Storage are supported as a remote backend. s3cmd & AWS S3 implementation is planned for the future release. There is an option to store history locally for test purposes.
+Currently, only `gsutil` and Google Cloud Storage are supported as a remote backend. awscli & AWS S3 implementation is planned for the future release. There is an option to store history locally for test purposes.
 
 This image does not support a multiple Stellar Core history backend yet. It's a big downside, sorry.
 
