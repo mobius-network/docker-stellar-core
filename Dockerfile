@@ -33,12 +33,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 
-ADD init_db.sh /usr/local/bin/stellar_init_db.sh
-ADD init_cache.sh /usr/local/bin/stellar_init_cache.sh
+ADD stellar_init_db.sh /usr/local/bin/
+ADD stellar_init_history.sh /usr/local/bin/
 ADD entrypoint.sh /entrypoint.sh
 ADD wait_for_postgres.sh /usr/local/bin/wait_for_postgres.sh
 
-# USER stellar
+USER stellar
 
 EXPOSE 11625
 EXPOSE 11626

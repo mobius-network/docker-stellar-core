@@ -9,7 +9,7 @@ services:
     environment:
       - POSTGRES_PASSWORD=password
   stellar-core:
-    image: stellar-core:latest
+    image: quay.io/evilmartians/docker-stellar-core:latest
     command:
       - "--conf /etc/stellar/stellar-core.cfg"
     environment:

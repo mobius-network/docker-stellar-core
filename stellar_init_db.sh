@@ -24,8 +24,3 @@ then
 fi
 
 echo "Database was already initialized. Skipping."
-
-
-export _test="postgresql://dbname=test host=postgres user=postgres password=password"
-
-psql "${_test#postgresql://}" -c "\dt"
