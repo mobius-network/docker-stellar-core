@@ -8,10 +8,10 @@ ARG STELLAR_VERSION="9.2.0-9"
 RUN mkdir -p /usr/share/man/man1 \
     && mkdir -p /usr/share/man/man7
 
-# prerequisites for stellar-core
+# prerequisites for stellar-core & some usefull tools
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install curl gnupg2 apt-transport-https man-db \
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install curl gnupg2 apt-transport-https man-db procps net-tools\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
