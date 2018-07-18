@@ -14,14 +14,13 @@ services:
       - "--conf /etc/stellar/stellar-core.cfg"
     environment:
       - STELLAR_CORE_DATABASE_URL=postgresql://dbname=stellarcore host=postgres user=postgres password=password
-      - STELLAR_CORE_HISTORY_CACHE_TYPE=gcloud
-      - STELLAR_CORE_HISTORY_CACHE_PATH=gs://YOURBUCKETNAME/
+      - STELLAR_CORE_HISTORY_ARCHIVES=cache,gcloud,gs://stellar-core-testnet-history-cache/
     networks:
       - stellar
     volumes:
       - ./stellar-core-testnet-example.cfg:/etc/stellar/stellar-core.cfg
       - ./boto-example.cfg:/etc/boto.cfg
-      - ./gcloud-service-account-key.json:/etc/mobius-service-account.json
+      - ./gcloud-service-account-key.json:/etc/gcloud-service-account.json
       - ./data:/var/lib/stellar/
       - ./logs:/var/log/stellar
     depends_on:

@@ -1,2 +1,6 @@
 data/
 log/
+*.yml
+*.yaml
+*.json
+*.cfg

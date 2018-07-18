@@ -1,6 +1,6 @@
 FROM debian:stretch-slim
 
-LABEL maintainer="Evil Martians <admin@evilmartians.com>"
+LABEL maintainer="Mobius Operations Team <ops@mobius.network>"
 
 ARG STELLAR_VERSION="9.2.0-9"
 
@@ -33,10 +33,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 
-ADD stellar_init_db.sh /usr/local/bin/
-ADD stellar_init_history.sh /usr/local/bin/
-ADD entrypoint.sh /entrypoint.sh
-ADD wait_for_postgres.sh /usr/local/bin/wait_for_postgres.sh
+ADD scripts/stellar_init_db.sh /usr/local/bin/
+ADD scripts/stellar_init_history.sh /usr/local/bin/
+ADD scripts/wait_for_postgres.sh /usr/local/bin/wait_for_postgres.sh
+ADD scripts/entrypoint.sh /entrypoint.sh
 
 USER stellar
 

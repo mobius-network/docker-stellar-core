@@ -15,7 +15,7 @@ else
   psql "${_service_db_url#postgresql://}" -c "CREATE DATABASE $_db_name" && echo "done"
 fi
 
-if psql "${STELLAR_CORE_DATABASE_URL#postgresql://}" -c "\dt" | grep -q "No relations"
+if psql "${STELLAR_CORE_DATABASE_URL#postgresql://}" -c "\dt" 2>&1 | grep -qE "(No relations|Did not find any)"
 then
   echo -n "Database is not initialized. Initializing... "
 	stellar-core --newdb --conf /etc/stellar/stellar-core.cfg && echo "done!"
