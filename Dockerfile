@@ -2,7 +2,7 @@ FROM debian:stretch-slim
 
 LABEL maintainer="Mobius Operations Team <ops@mobius.network>"
 
-ARG STELLAR_VERSION="10.0.0-11"
+ARG STELLAR_VERSION="10.1.0-17"
 
 # hack to make postgresql-client install work on slim
 RUN mkdir -p /usr/share/man/man1 \
@@ -46,3 +46,4 @@ EXPOSE 11626
 WORKDIR /var/lib/stellar
 
 ENTRYPOINT [ "/entrypoint.sh" ]
+CMD [ "run", "--conf", "/etc/stellar/stellar-core.cfg" ]

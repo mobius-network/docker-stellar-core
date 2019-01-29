@@ -10,8 +10,6 @@ services:
       - POSTGRES_PASSWORD=password
   stellar-core:
     image: quay.io/evilmartians/docker-stellar-core:latest
-    command:
-      - "--conf /etc/stellar/stellar-core.cfg"
     environment:
       - STELLAR_CORE_DATABASE_URL=postgresql://dbname=stellarcore host=postgres user=postgres password=password
       - STELLAR_CORE_HISTORY_ARCHIVES=cache,gcloud,gs://stellar-core-testnet-history-cache/

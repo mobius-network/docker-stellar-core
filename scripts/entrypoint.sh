@@ -6,4 +6,4 @@ set -ue
 /usr/local/bin/stellar_init_db.sh
 /usr/local/bin/stellar_init_history.sh
 
-exec /usr/bin/stellar-core $@
+exec "/usr/bin/stellar-core" "$@"

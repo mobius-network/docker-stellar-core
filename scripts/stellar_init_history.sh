@@ -39,7 +39,7 @@ else
     # Stellar core checks history archive cache before initializing one.
     if [ "X$_init_cache" == "Xtrue" ]
     then
-      stellar-core --newhist $_name --conf /etc/stellar/stellar-core.cfg
+      stellar-core new-hist $_name --conf /etc/stellar/stellar-core.cfg
     else
       echo "Skipping Stellar core cache creation."
     fi
