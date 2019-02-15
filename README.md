@@ -9,7 +9,7 @@ There is **no** `confd` or other template or configuration engines included as i
 ## How to get
 
 ```shell
-docker pull mobiusnetwork/stellar-core:9.2.0-9-2
+docker pull mobiusnetwork/stellar-core:10.2.0-19
 ```
 
 ## How to use

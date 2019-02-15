@@ -2,7 +2,8 @@ FROM debian:stretch-slim
 
 LABEL maintainer="Mobius Operations Team <ops@mobius.network>"
 
-ARG STELLAR_VERSION="10.1.0-17"
+ARG STELLAR_VERSION="10.2.0-19"
+ARG DEBIAN_FRONTEND=noninteractive
 
 # hack to make postgresql-client install work on slim
 RUN mkdir -p /usr/share/man/man1 \
@@ -10,28 +11,21 @@ RUN mkdir -p /usr/share/man/man1 \
 
 # prerequisites for stellar-core & some usefull tools
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install curl gnupg2 apt-transport-https man-db procps net-tools\
-    && apt-get clean \
+    && apt-get -y install curl gnupg1 apt-transport-https \
+    && curl -s https://apt.stellar.org/SDF.asc | apt-key add - \
+    && echo "deb https://apt.stellar.org/public stable/" > /etc/apt/sources.list.d/SDF.list \
+    && apt-get purge -y --auto-remove gnupg1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Stellar core installation
-RUN curl -q https://apt.stellar.org/SDF.asc | apt-key add - \
-    && echo "deb https://apt.stellar.org/public stable/" | tee -a /etc/apt/sources.list.d/SDF.list \
-    && apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install stellar-core=$STELLAR_VERSION \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Additional packages
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install postgresql-client python-pip \
+    && apt-get -y install stellar-core=$STELLAR_VERSION jq postgresql-client python-pip \
     && pip install "pyasn1>=0.4.3" \
     && pip install gsutil \
     && pip install awscli \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
+    && apt-get remove --purge --auto-remove -y apt-transport-https ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm /etc/apt/sources.list.d/SDF.list
 
 ADD scripts/stellar_init_db.sh /usr/local/bin/
 ADD scripts/stellar_init_history.sh /usr/local/bin/
